@@ -24,7 +24,6 @@ class CreateFeedbackTable extends Migration
             $table->string('img');
             $table->foreignId('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
-            $table->timestamp('date_create');
         });
     }
 

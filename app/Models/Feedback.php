@@ -16,6 +16,5 @@ class Feedback extends Model
         'rating',
         'user_id',
         'img',
-        'date_create',
     ];
 }
