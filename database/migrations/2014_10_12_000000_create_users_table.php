@@ -24,6 +24,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->integer('phone');
+            $table->string('token')->nullable();
+            $table->boolean('verified')->default(false);
         });
     }
 

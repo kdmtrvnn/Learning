@@ -9,6 +9,29 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+ 
+        static::creating(function ($user) 
+        {
+            $user->token = \Str::random(30);
+        });
+    }
+
+    public function confirmEmail()
+    {
+        $this->verified = true;
+        $this->token = null;
+ 
+        $this->save();
+    }
+
     use HasFactory, Notifiable;
 
     /**
@@ -17,7 +40,9 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
+        'surname',
         'name',
+        'patronymic',
         'email',
         'password',
         'phone',
