@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,12 +14,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/feedbacks/{city}', [CityController::class, 'take'])
+                ->middleware('auth');
+
+Route::get('/cities', [CityController::class, 'get'])
+                ->middleware('auth');
+
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';

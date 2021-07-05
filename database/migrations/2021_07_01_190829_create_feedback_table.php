@@ -17,7 +17,7 @@ class CreateFeedbackTable extends Migration
             $table->id();
             $table->timestamps();
             $table->foreignId('city_id')->nullable();
-            $table->foreign('city_id')->references('id')->on('citys');
+            $table->foreign('city_id')->references('id')->on('cities');
             $table->string('title');
             $table->string('text');
             $table->integer('rating');
