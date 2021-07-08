@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CityController;
+use App\Http\Controllers\FeedbackController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +15,34 @@ use App\Http\Controllers\CityController;
 |
 */
 
-Route::get('/feedbacks/{city}', [CityController::class, 'take'])
+Route::post('/edit', [FeedbackController::class, 'edit'])
                 ->middleware('auth');
 
-Route::get('/cities', [CityController::class, 'get'])
+Route::get('/myfeedback/{feedback}', [FeedbackController::class, 'editingPage'])
                 ->middleware('auth');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/city', [CityController::class, 'takeYes']);
+
+Route::get('/back', [CityController::class, 'takeNo']);
+
+Route::get('/myfeedbacks', [FeedbackController::class, 'show'])
+                ->middleware('auth');
+
+Route::post('/feedbacks-create', [FeedbackController::class, 'create'])
+                ->middleware('auth');
+
+Route::get('/feedbacks-create', [FeedbackController::class, 'store'])
+                ->middleware('auth');
+
+Route::get('/feedbacks/{city}', [CityController::class, 'take']);
+
+
+Route::get('/{feedback}/img', [FeedbackController::class, 'img']);
+
+
+Route::get('/cities', [CityController::class, 'get']);
+
+Route::get('/', [CityController::class, 'welcome']);
+
 
 require __DIR__.'/auth.php';

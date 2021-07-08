@@ -10,14 +10,14 @@
             <!-- Email Address -->
 
             <div>
-                <label for="email" class="text-secondary">Email</label>
+                <label for="email" class="text-secondary">Email:</label>
 
                 <input id="email" class="form-control @error('name') is-invalid @enderror" type="email" name="email" value="{{old('email')}}" required autofocus />
             </div>
 
             <!-- Password -->
             <div class="mt-4">
-                <label for="password" class="text-secondary">Password</label>
+                <label for="password" class="text-secondary">Password:</label>
 
                 <input id="password" class="form-control @error('name') is-invalid @enderror"
                                 type="password"
@@ -34,16 +34,9 @@
             </div>
             <br>
             <div class="flex items-center justify-end ms-auto">
-                @if (Route::has('password.request'))
-                    <a class="link-info" href="{{ route('password.request') }}">
-                        {{ __('Forgot your password?') }}
-                    </a>
-                @endif
-            <br>
-            <br>
-                <button type="submit" class="btn btn-outline-info">
+            <button type="submit" class="btn btn-outline-info">
                     {{ __('Log in') }}
-                </button>
+            </button>
             </div>
         </form>
         </div>

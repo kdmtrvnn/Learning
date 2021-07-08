@@ -48,7 +48,7 @@ class AuthenticatedSessionController extends Controller
         {
             $request->session()->flash('message', 'Добро пожаловать!');
  
-            return redirect()->intended('/cities');
+            return redirect()->intended('/');
         }
  
         $request->session()->flash('message', 'Вход запрещен!');

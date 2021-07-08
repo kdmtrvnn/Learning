@@ -21,7 +21,7 @@ class CreateFeedbackTable extends Migration
             $table->string('title');
             $table->string('text');
             $table->integer('rating');
-            $table->string('img');
+            $table->string('img')->nullable();
             $table->foreignId('user_id')->nullable();
             $table->foreign('user_id')->references('id')->on('users');
         });

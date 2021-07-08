@@ -53,6 +53,7 @@ class RegisteredUserController extends Controller
             'phone' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'captcha' => 'required|captcha',
         ]);
 
         $user = User::create($request->all());

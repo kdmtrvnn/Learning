@@ -3,7 +3,6 @@
 
 <h5> Отзывы: </h5>
 
-@isset($feedbacks)
 @foreach($feedbacks as $feedback)
 <div class="container-fluid">
 <div class="row">
@@ -15,14 +14,17 @@
 <h7> Рейтинг: {{$feedback->rating}} </h7><br>
 <h7> Автор: {{$feedback->user->surname}} {{$feedback->user->name}} {{$feedback->user->patronymic}}</h7>
 @if($feedback->img !== null)
-<img src="{{Storage::url($feedback->img)}}" width="200"></img>
+<img class="mt-2" src="{{Storage::url($feedback->img)}}" width="200"></img>
 @endif
 
+<form action="/myfeedback/{{$feedback->id}}">
+<button type="submit" class="btn btn-outline-info mt-2">Редактировать</button>
+</form>
 
 </div>
 </div>
 </div>
 </div>
 @endforeach
-@endisset
+
 @endsection
