@@ -11,7 +11,7 @@
 
 <h6> Заголовок: {{$feedback->title}} </h6>
 <h7 class="fw-normal fst-italic"> «{{$feedback->text}}» </h7><br>
-<h7> Рейтинг: {{$feedback->rating}} </h7><br>
+<h7 style="color: #ffc107;"> Рейтинг: {{$feedback->rating}} </h7><br>
 <h7> Автор: {{$feedback->user->surname}} {{$feedback->user->name}} {{$feedback->user->patronymic}}</h7>
 @if($feedback->img !== null)
 <img class="mt-2" src="{{Storage::url($feedback->img)}}" width="200"></img>

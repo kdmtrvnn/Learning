@@ -9,6 +9,12 @@ use Image;
 
 class FeedbackController extends Controller
 {
+    public function author(Request $request, Feedback $feedback)
+    {
+        $feedback = Feedback::where('id', $feedback->id)->first();
+        return view('author_page', ['feedback' => $feedback]);
+    }
+
     public function edit(Request $request, Feedback $feedback)
     {
         $request->validate([
@@ -25,7 +31,7 @@ class FeedbackController extends Controller
         if($request->file('image'))
         {
             array_push($arr, $request->file('image')->store('city', 'public'));
-            
+
             $feedback->update([
                 'city_id' => $city->id,
                 'title' => $request->title,
@@ -86,7 +92,9 @@ class FeedbackController extends Controller
 
         $city = City::where('name', $request->city)->first();
 
-        $feedback = Feedback::create([
+        if($request->city && $city)
+        {
+            $feedback = Feedback::create([
             'city_id' => $city->id,
             'title' => $request->title,
             'text' => $request->text,
@@ -95,6 +103,27 @@ class FeedbackController extends Controller
             'user_id' => \Auth::id(),
             ]);
 
-        return redirect()->back();
+            return redirect()->back();
+        }
+        else
+        {
+            $data = file_get_contents("http://api.openweathermap.org/data/2.5/weather?q=$request->city&appid=fcf55d4417d3c3e2a6b91e233a2945b1&units=metric&lang=ru");
+            $data = json_decode($data);
+            
+            City::create(['name' => $data->name]);
+
+            $city = City::where('name', $data->name)->first();
+
+            $feedback = Feedback::create([
+                'city_id' => $city->id,
+                'title' => $request->title,
+                'text' => $request->text,
+                'rating' => $request->rating,
+                'img' => $request->file('image')->store('city', 'public'),
+                'user_id' => \Auth::id(),
+            ]);
+
+            return redirect()->back();
+        }
     }
 }

@@ -11,10 +11,10 @@
 
 <h5>Выберите город:</h5>
 <div class="container-fluid mx-auto my-auto p-4">
-  <div class="row"> 
-	@foreach($cities as $city)
- 	 <div class="card col-lg-3 card text-center">
- 	   <div class="card-body">
+<div class="row"> 
+@foreach($cities as $city)
+<div class="card col-lg-3 card text-center">
+<div class="card-body">
 
 <form action="/feedbacks/{{$city->id}}">
 <button type="submit" class="btn btn-outline-info"><h6>{{$city->name}}</h6> Выбрать </button>

@@ -14,6 +14,8 @@ use App\Http\Controllers\FeedbackController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/author/{feedback}', [FeedbackController::class, 'author'])
+                ->middleware('auth');
 
 Route::post('/edit', [FeedbackController::class, 'edit'])
                 ->middleware('auth');
